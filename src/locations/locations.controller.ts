@@ -2,21 +2,21 @@ import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { Location } from './Location.entity';
 import { LocationsService } from './locations.service';
 
-@Controller('locations')
+@Controller()
 export class LocationsController {
   constructor(private locationService: LocationsService) {}
 
-  @Post()
+  @Post('addlocation')
   addLocation(@Body() location: Location) {
     this.locationService.addLocation(location);
   }
 
-  @Get(':id')
+  @Get('viewlocation/:id')
   getLocation(@Param('id') id: string) {
     return this.locationService.getLocation(id);
   }
 
-  @Delete(':id')
+  @Delete('deletelocation/:id')
   remove(@Param('id') id: string) {
     this.locationService.remove(id);
   }

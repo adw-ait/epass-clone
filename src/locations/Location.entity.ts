@@ -7,7 +7,7 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 
-import { IsInt, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsString, MaxLength, MinLength } from 'class-validator';
 import { Login } from 'src/login/Login.entity';
 
 @Entity({ name: 'locations' })
@@ -35,8 +35,8 @@ export class Location extends BaseEntity {
   question: string;
 
   @Column()
-  @IsInt()
-  peopleCount: number;
+  @IsString()
+  peopleCount: string;
 
   @ManyToOne(() => Login, (login) => login.id)
   userid: Login;
