@@ -38,6 +38,10 @@ export class Location extends BaseEntity {
   @IsString()
   peopleCount: string;
 
+  @Column({ default: 'no' })
+  @IsString()
+  is_deleted: string;
+
   @ManyToOne(() => Login, (login) => login.id)
   userid: Login;
 }

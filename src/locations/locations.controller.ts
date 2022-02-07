@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Location } from './Location.entity';
 import { LocationsService } from './locations.service';
 
@@ -16,7 +16,7 @@ export class LocationsController {
     return this.locationService.getLocation(id);
   }
 
-  @Delete('deletelocation/:id')
+  @Post('deletelocation/:id')
   remove(@Param('id') id: string) {
     this.locationService.remove(id);
   }
