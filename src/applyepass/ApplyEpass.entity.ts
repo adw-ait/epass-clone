@@ -59,6 +59,11 @@ export class ApplyEpass extends BaseEntity {
   @IsString()
   dates: string;
 
+  @Column({ default: 'pending' })
+  @MinLength(1)
+  @IsString()
+  status: string;
+
   @ManyToOne(() => Login, (login) => login.id)
   userid: Login;
 }
