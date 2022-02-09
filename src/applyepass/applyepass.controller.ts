@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ConfigService } from 'src/config/config.service';
 import { ApplyEpass } from './ApplyEpass.entity';
 import { ApplyepassService } from './applyepass.service';
 
+@UseGuards(JwtAuthGuard)
 @Controller()
 export class ApplyepassController {
   constructor(
