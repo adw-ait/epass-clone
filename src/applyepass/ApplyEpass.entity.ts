@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { IsString, MinLength } from 'class-validator';
 import { Location } from 'src/locations/Location.entity';
-import { Login } from 'src/login/Login.entity';
+import { Auth } from 'src/auth/Auth.entity';
 
 @Entity({ name: 'applyepass' })
 export class ApplyEpass extends BaseEntity {
@@ -64,6 +64,6 @@ export class ApplyEpass extends BaseEntity {
   @IsString()
   status: string;
 
-  @ManyToOne(() => Login, (login) => login.id)
-  userid: Login;
+  @ManyToOne(() => Auth, (auth) => auth.id)
+  userid: Auth;
 }

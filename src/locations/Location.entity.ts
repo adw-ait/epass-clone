@@ -8,7 +8,8 @@ import {
 } from 'typeorm';
 
 import { IsString, MaxLength, MinLength } from 'class-validator';
-import { Login } from 'src/login/Login.entity';
+
+import { Auth } from 'src/auth/Auth.entity';
 
 @Entity({ name: 'locations' })
 export class Location extends BaseEntity {
@@ -42,6 +43,6 @@ export class Location extends BaseEntity {
   @IsString()
   is_deleted: string;
 
-  @ManyToOne(() => Login, (login) => login.id)
-  userid: Login;
+  @ManyToOne(() => Auth, (auth) => auth.id)
+  userid: Auth;
 }
