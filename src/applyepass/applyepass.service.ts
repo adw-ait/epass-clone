@@ -1,8 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UseGuards } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Repository } from 'typeorm';
 import { ApplyEpass } from './ApplyEpass.entity';
 
+@UseGuards(JwtAuthGuard)
 @Injectable()
 export class ApplyepassService {
   constructor(
@@ -19,5 +21,9 @@ export class ApplyepassService {
       where: { userid: id },
       relations: ['userid', 'locationid'],
     });
+  }
+
+  async getAllEpass(): Promise<ApplyEpass[]> {
+    return await this.applyEpassRepository.find();
   }
 }

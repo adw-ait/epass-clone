@@ -25,4 +25,9 @@ export class ApplyepassController {
     };
     return data;
   }
+
+  @Get('viewallepass')
+  async getAllEpass() {
+    return this.applyepassService.getAllEpass();
+  }
 }
