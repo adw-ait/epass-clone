@@ -5,25 +5,28 @@ import { ApplyEpass } from './ApplyEpass.entity';
 import { ApplyepassService } from './applyepass.service';
 
 @UseGuards(JwtAuthGuard)
-@Controller()
+@Controller('applyepass')
 export class ApplyepassController {
   constructor(
     private applyepassService: ApplyepassService,
     private configService: ConfigService,
   ) {}
 
-  @Post('applyepass')
+  @Get()
+  async getConfig(){
+    return await this.configService.getConfig()
+  }
+
+  @Post('requestepass')
   addEpass(@Body() epass: ApplyEpass) {
     this.applyepassService.addEpass(epass);
+    return "applied for epass successfully"
   }
 
   @Get('viewepass/:id')
   async getEpass(@Param('id') id: string) {
-    const data = {
-      epassData: await this.applyepassService.getEpass(id),
-      config: await this.configService.getConfig(),
-    };
-    return data;
+   
+    return await this.applyepassService.getEpass(id);
   }
 
   @Get('viewallepass')

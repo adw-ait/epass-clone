@@ -10,7 +10,7 @@ export class ConfigService {
     private configRepository: Repository<Config>,
   ) {}
 
-  async getConfig(): Promise<Config[]> {
-    return await this.configRepository.find();
+  async getConfig(): Promise<Config> {
+    return await this.configRepository.findOne();
   }
 }
