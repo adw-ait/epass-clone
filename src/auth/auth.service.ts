@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import * as bcrypt from 'bcrypt';
-
 import { Repository } from 'typeorm';
 import { Auth } from './Auth.entity';
 
@@ -20,35 +18,29 @@ export class AuthService {
     });
   }
 
-  async createUser(username: string, password: string) {
+  async createUser(username: string) {
     await this.authRepository.insert({
       email: username,
-      password: password,
       name: username,
     });
   }
 
   async validateUser(username: string, password: string): Promise<any> {
     const verifyEmail = username.split('@');
+    console.log(verifyEmail);
 
     if (verifyEmail[1] === 'leftrightmind.com') {
       const [user] = await this.getUser(username);
       if (!user) {
         // CREATE USER
-
-        const hashedPassword = await bcrypt.hash(password, 12);
-        await this.createUser(username, hashedPassword);
+        await this.createUser(username);
         const [newUser] = await this.getUser(username);
         return newUser;
       }
       // RETURN USER
       // ALREADY EXISTS
-      if (!(await bcrypt.compare(password, user.password))) {
-        return null;
-      } else {
-        const newUser = { email: user.email, id: user.id };
-        return newUser;
-      }
+      const newUser = { email: user.email, id: user.id };
+      return newUser;
     }
 
     return null;

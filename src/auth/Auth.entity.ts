@@ -17,11 +17,5 @@ export class Auth extends BaseEntity {
   @MinLength(1)
   @MaxLength(150)
   @IsString()
-  password: string;
-
-  @Column()
-  @MinLength(1)
-  @MaxLength(150)
-  @IsString()
   name: string;
 }
